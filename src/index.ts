@@ -52,6 +52,7 @@ import certificadosPRoutes from './routes/certificadosParticipacionRoutes';
 import certificadosCRoutes from './routes/certificadosComiteRoutes';
 import autoresRoutes from './routes/certificadosAutoresRoutes';
 import certificadosAsistenciaRoutes from './routes/certificadosAsistenciaRoutes';
+import expositorRoutes from './routes/expositorRoutes';
 
 class Server {
 
@@ -124,6 +125,7 @@ class Server {
         this.app.use('/certificadosC', certificadosCRoutes); 
         this.app.use('/autores', autoresRoutes);  
         this.app.use('/certificadosAsistencia', certificadosAsistenciaRoutes);  
+        this.app.use('/expositor', expositorRoutes);  
        // this.app.use('/certificados', certificadoController);
        this.app.use('/public/comprobantes', express.static(path.resolve('public/comprobantes'))); 
        this.app.use('/public/facturas', express.static(path.resolve('public/facturas'))); 
@@ -148,7 +150,8 @@ class Server {
        this.app.use('/public/certificadosAsistencia', express.static(path.resolve('public/certificadosAsistencia'))); 
        this.app.use('/public/certificadosAutores', express.static(path.resolve('public/certificadosAutores'))); 
        this.app.use('/public/certificadosComite', express.static(path.resolve('public/certificadosComite'))); 
-       this.app.use('/public/certificadosParticipacion', express.static(path.resolve('public/certificadosParticipacion'))); 
+       this.app.use('/public/certificadosParticipacion', express.static(path.resolve('public/certificadosParticipacion')));
+       this.app.use('/public/certificadosExpositores', express.static(path.resolve('public/certificadosExpositores')));  
         
     }
 

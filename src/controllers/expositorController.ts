@@ -8,12 +8,22 @@ class ExpositorController {
   public async list(req: Request, res: Response): Promise<void> {
     try {
       const games = await pool.query(
-        `SELECT  CONCAT(a.Nombre1,' ',a.Apellido1) as nombre, p.titulo,p.certificado_E  FROM inscripcion as i, paper as p, autores as a where i.id=p.id_inscripcion AND p.id=a.id_paper_per AND a.expositor=true AND i.estado='V'`
+        `SELECT p.id,  CONCAT(a.Nombre1,' ',a.Apellido1) as nombre, p.titulo,p.certificado_E  FROM inscripcion as i, paper as p, autores as a where i.id=p.id_inscripcion AND p.id=a.id_paper_per AND a.expositor=true AND i.estado='V'`
       );
       res.json(games);
     } catch (error) {}
   }
-
+  public async ExpositorPaper(req: Request, res: Response): Promise<void> {
+    const {id}=req.params;
+    console.log(id)
+    try {
+      const games = await pool.query(
+        `SELECT p.id,  CONCAT(a.Nombre1,' ',a.Apellido1) as nombre, p.titulo,p.certificado_E  FROM inscripcion as i, paper as p, autores as a where i.id=p.id_inscripcion AND p.id=a.id_paper_per AND a.expositor=true AND i.estado='V' AND p.id=${id};`
+      );
+      console.log(games[0])
+      res.json(games[0]);
+    } catch (error) {}
+  }
   
 
   public async crearCertificado(req: Request, res: Response): Promise<void> {
