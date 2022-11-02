@@ -4,12 +4,13 @@ import fs from 'fs';
 import QRCode from 'qrcode';
 import pool from "../database";
 import keys from '../keys';
+import mailerController from "./mailerController";
 class CertificadoPController {
   public async crearCertificado(req: Request, res: Response): Promise<void> {
     try {
       
     
-  const {id, nombre,cedula } = req.body; 
+  const {id, nombre,cedula,correo } = req.body; 
   const URlprincipal = keys.urlCertificados.url;
   const URLFondo = URlprincipal +"/public/certificados/PARTICIPACION.PNG";
   const URLRuta= URlprincipal +`/public/certificadosParticipacion/${cedula}.pdf`
@@ -86,6 +87,7 @@ const options: CreateOptions = {
     certificado_P:ruta
   }
   pool.query(`UPDATE inscripcion set ? WHERE id = ?`, [adminInscripGuardar, id]);
+  mailerController.CreacionCertificado(URLRuta,correo,"Participación");
   res.json({ message: "La inscripcion fue actualizada" });
   })
 } catch (error) {

@@ -4,10 +4,14 @@ import fs from "fs";
 import QRCode from "qrcode";
 import pool from "../database";
 import keys from '../keys';
+import mailerController from '../controllers/mailerController';
+var nodeoutlook = require("nodejs-nodemailer-outlook");
+const nodemailer = require("nodemailer");
 class CertificadoPController {
   public async crearCertificado(req: Request, res: Response): Promise<void> {
     try {
-      const { id, nombre, cedula } = req.body;
+      const { id, nombre, cedula,correo } = req.body;
+      console.log(req.body)
       const URlprincipal = keys.urlCertificados.url;
       const URLFondo = URlprincipal + "/public/certificados/ASISTENCIA.PNG";
       const URLRuta =
@@ -73,7 +77,7 @@ class CertificadoPController {
           orientation: "landscape",
         };
 
-        pdf
+      const archivo =  pdf
           .create(pdfv, options)
           .toFile(
             `./public/certificadosAsistencia/${cedula}.pdf`,
@@ -93,10 +97,25 @@ class CertificadoPController {
           adminInscripGuardar,
           id,
         ]);
+
+
+        //Correo
+      
+
+        mailerController.CreacionCertificado(URLRuta,correo,"Asistencia");
+
+        ////////////////////////////////
+
+
+
+
         res.json({ message: "La inscripcion fue actualizada" });
+      
       });
     } catch (error) {}
   }
+ 
+
 }
 const certificadoPController = new CertificadoPController();
 export default certificadoPController;

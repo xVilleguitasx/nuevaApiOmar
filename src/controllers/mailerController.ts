@@ -24,6 +24,42 @@ class MailerController {
     }
   }
 
+
+  public async CreacionCertificado(ruta:string,destinatario:string,asunto:string){
+    
+    const mensaje = `
+    <!DOCTYPE html>
+<html>
+<body style="text-align:center">
+
+<p> Estimado participante su certificado de ${asunto} a sido generado  </p>
+<p> Puedes contrarlo en la siguiente dirección:  </p>
+<p> ${ruta}  </p>
+<hr />
+</body>
+</html>
+   
+    `;
+    try {
+      nodeoutlook.sendEmail({
+        port: 587,
+        auth: {
+          user: "csei@uta.edu.ec",
+          pass: "Congreso?2021",
+        },
+        from: "csei@uta.edu.ec",
+        to: `${destinatario}`,
+        subject: `Certificado ${asunto}`,
+        html: `${mensaje}`,
+      });
+   
+    } catch (error) {
+      console.log(error);
+    
+    }
+  }
+
+
   public async MailRegistro(req: Request, res: Response): Promise<void> {
     const { nombre, ci, monto, destinatario, titulo, fecha, edicion , idioma} = req.body;
     console.log(req.body);
@@ -141,7 +177,7 @@ class MailerController {
         auth: {
           user: "csei@uta.edu.ec",
           pass: "Congreso?2021",
-        },
+        }, 
         from: "csei@uta.edu.ec",
         to: `${destinatario}`,
         subject: `CSEI 2022`,
