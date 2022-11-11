@@ -71,7 +71,7 @@ class AutoresController {
                   height: 40px;
                   position: absolute;
                   top: 50%;
-                  left: 35%;
+                  left: 30%;
           
                   margin: -25px 0 0 -25px;
                 }
@@ -85,8 +85,8 @@ class AutoresController {
                     margin: -25px 0 0 -25px;
                   }
                 .canvas {
-                  width: 125px;
-                  height: 125px;
+                  width: 130px;
+        height: 130px;
                   /* centrado vertical */
                   position: absolute;
                   top: 3%;

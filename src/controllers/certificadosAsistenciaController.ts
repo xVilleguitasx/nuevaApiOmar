@@ -41,13 +41,13 @@ class CertificadoPController {
         height: 50px;
         position: absolute;
         top: 54%;
-        left: 35%;
+        left: 30%;
 
         margin: -25px 0 0 -25px;
       }
       .canvas {
-        width: 125px;
-        height: 125px;
+        width: 130px;
+        height: 130px;
         /* centrado vertical */
         position: absolute;
         top: 3%;
