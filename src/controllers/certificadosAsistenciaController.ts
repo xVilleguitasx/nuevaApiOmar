@@ -17,6 +17,7 @@ class CertificadoPController {
       const URLRuta =
         URlprincipal + `/public/certificadosAsistencia/${cedula}.pdf`;
       QRCode.toDataURL(URLRuta, function (err, url) {
+        
         const pdfv = `<!DOCTYPE html>
 <html>
   <head>

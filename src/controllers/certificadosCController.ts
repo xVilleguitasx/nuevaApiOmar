@@ -36,18 +36,18 @@ class CertificadoCController {
                 width: 100%;
                 height: 50px;
                 position: absolute;
-                top: 50%;
+                top: 53%;
                 left: 30%;
         
                 margin: -25px 0 0 -25px;
               }
               .canvas {
-                width: 130px;
-                height: 130px;
+                width: 110px;
+                height: 110px;
                 /* centrado vertical */
                 position: absolute;
                 top: 3%;
-                left: 105%;
+                left: 112%;
                 margin-top: -25px;
               }
               img{
