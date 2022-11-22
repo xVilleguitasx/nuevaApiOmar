@@ -30,7 +30,7 @@ class ExpositorController {
     try {
       const { id, nombre, titulo } = req.body;
       const URlprincipal =keys.urlCertificados.url;
-      const URLFondo = URlprincipal + "/public/certificados/EXPOSITOR.PNG";
+      const URLFondo = "http://localhost:3000"  + "/public/certificados/EXPOSITOR.PNG";
       const URLRuta =
         URlprincipal + `/public/certificadosExpositores/${titulo}.pdf`;
       QRCode.toDataURL(URLRuta, function (err, url) {
@@ -55,10 +55,10 @@ class ExpositorController {
                 }
                 .nombre {
                   width: 100%;
-                  height: 40px;
+                  height: 50px;
                   position: absolute;
-                  top: 50%;
-                  left: 35%;
+                  top: 47%;
+                  left: 30%;
           
                   margin: -25px 0 0 -25px;
                 }
@@ -66,20 +66,22 @@ class ExpositorController {
                     width: 100%;
                     height: 50px;
                     position: absolute;
-                    top: 61%;
+                    top: 54%;
                     left: 22%;
             
                     margin: -25px 0 0 -25px;
                   }
                 .canvas {
-                  width: 125px;
-                  height: 125px;
+                  width: 110px;
+                  height: 110px;
                   /* centrado vertical */
                   position: absolute;
                   top: 3%;
-                  left: 105%;
+                  left: 112%;
                   margin-top: -25px;
                 }
+               
+               
                 img{
                   width:100%;
                   height:100%;

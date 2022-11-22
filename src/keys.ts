@@ -7,7 +7,7 @@ export default {
         database: 'csei2'
     },
     urlCertificados:{
-        url:"http://localhost:3000"
+        url:"https://csei.uta.edu.ec/api"
     }
 
 }

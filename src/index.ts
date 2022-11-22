@@ -152,7 +152,7 @@ class Server {
        this.app.use('/public/certificadosComite', express.static(path.resolve('public/certificadosComite'))); 
        this.app.use('/public/certificadosParticipacion', express.static(path.resolve('public/certificadosParticipacion')));
        this.app.use('/public/certificadosExpositores', express.static(path.resolve('public/certificadosExpositores')));  
-        
+       this.app.use('/public/certificadosConferencistas', express.static(path.resolve('public/certificadosConferencistas'))); 
     }
 
     start() {

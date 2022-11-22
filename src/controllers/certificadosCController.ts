@@ -10,7 +10,7 @@ class CertificadoCController {
     try {
       const { id, nombre } = req.body;
       const URlprincipal = keys.urlCertificados.url;
-      const URLFondo = URlprincipal + "/public/certificados/COMITE.PNG";
+      const URLFondo = "http://localhost:3000" + "/public/certificados/COMITE.PNG";
       const URLRuta = URlprincipal + `/public/certificadosComite/${nombre}.pdf`;
       QRCode.toDataURL(URLRuta, function (err, url) {
         const pdfv = `<!DOCTYPE html>

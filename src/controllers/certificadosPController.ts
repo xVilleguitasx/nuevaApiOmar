@@ -12,7 +12,7 @@ class CertificadoPController {
     
   const {id, nombre,cedula,correo } = req.body; 
   const URlprincipal = keys.urlCertificados.url;
-  const URLFondo = URlprincipal +"/public/certificados/PARTICIPACION.PNG";
+  const URLFondo = "http://localhost:3000" +"/public/certificados/PARTICIPACION.PNG";
   const URLRuta= URlprincipal +`/public/certificadosParticipacion/${cedula}.pdf`
   QRCode.toDataURL(URLRuta, function (err, url) {
     const pdfv = `<!DOCTYPE html>
@@ -44,12 +44,12 @@ class CertificadoPController {
         margin: -25px 0 0 -25px;
       }
       .canvas {
-        width: 130px;
-        height: 130px;
+        width: 110px;
+        height: 110px;
         /* centrado vertical */
         position: absolute;
         top: 3%;
-        left: 110%;
+        left: 112%;
         margin-top: -25px;
       }
       img{
@@ -87,7 +87,7 @@ const options: CreateOptions = {
     certificado_P:ruta
   }
   pool.query(`UPDATE inscripcion set ? WHERE id = ?`, [adminInscripGuardar, id]);
-  mailerController.CreacionCertificado(URLRuta,correo,"Participación");
+  /* mailerController.CreacionCertificado(URLRuta,correo,"Participación"); */
   res.json({ message: "La inscripcion fue actualizada" });
   })
 } catch (error) {

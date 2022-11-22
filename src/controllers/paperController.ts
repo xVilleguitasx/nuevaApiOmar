@@ -5,7 +5,7 @@ import pool from "../database";
 class PaperContreoller {
   public async list(req: Request, res: Response): Promise<void> {
     try {
-      const games = await pool.query("SELECT * FROM paper");
+      const games = await pool.query("SELECT * FROM paper order by id_paper ASC");
       res.json(games);
     } catch (error) {}
   }

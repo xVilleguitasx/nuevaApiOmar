@@ -13,7 +13,7 @@ class CertificadoPController {
       const { id, nombre, cedula,correo } = req.body;
       console.log(req.body)
       const URlprincipal = keys.urlCertificados.url;
-      const URLFondo = URlprincipal + "/public/certificados/ASISTENCIA.PNG";
+      const URLFondo = "http://localhost:3000" + "/public/certificados/ASISTENCIA.PNG";
       const URLRuta =
         URlprincipal + `/public/certificadosAsistencia/${cedula}.pdf`;
       QRCode.toDataURL(URLRuta, function (err, url) {
@@ -47,12 +47,12 @@ class CertificadoPController {
         margin: -25px 0 0 -25px;
       }
       .canvas {
-        width: 130px;
-        height: 130px;
+        width: 110px;
+        height: 110px;
         /* centrado vertical */
         position: absolute;
         top: 3%;
-        left: 105%;
+        left: 112%;
         margin-top: -25px;
       }
       img{
@@ -103,7 +103,7 @@ class CertificadoPController {
         //Correo
       
 
-        mailerController.CreacionCertificado(URLRuta,correo,"Asistencia");
+      /*   mailerController.CreacionCertificado(URLRuta,correo,"Asistencia"); */
 
         ////////////////////////////////
 
