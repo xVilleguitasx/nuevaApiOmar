@@ -45,7 +45,7 @@ class AutoresController {
       const URlprincipal = keys.urlCertificados.url;
       const URLFondo = "http://localhost:3000" + "/public/certificados/autores.PNG";
       const URLRuta =
-        URlprincipal + `/public/certificadosAutores/${titulo}.pdf`;
+        URlprincipal + `/public/certificadosAutores/${id}.pdf`;
       QRCode.toDataURL(URLRuta, function (err, url) {
         const pdfv = `<!DOCTYPE html>
           <html>
@@ -123,14 +123,14 @@ class AutoresController {
         pdf
           .create(pdfv, options)
           .toFile(
-            `./public/certificadosAutores/${titulo}.pdf`,
+            `./public/certificadosAutores/${id}.pdf`,
             function (err, res) {
               if (err) {
               } else {
               }
             }
           );
-        const ruta = `public/certificadosAutores/${titulo}.pdf`;
+        const ruta = `public/certificadosAutores/${id}.pdf`;
         const autorGuardar = {
           certificado: ruta,
         };
