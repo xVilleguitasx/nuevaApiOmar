@@ -70,7 +70,7 @@ class AutoresController {
                   width: 100%;
                   height: 50px;
                   position: absolute;
-                  top: 49%;
+                  top: 47%;
                   left: 30%;
           
                   margin: -25px 0 0 -25px;
@@ -79,7 +79,7 @@ class AutoresController {
                     width: 100%;
                     height: 50px;
                     position: absolute;
-                    top: 53%;
+                    top: 54%;
                     left: 22%;
             
                     margin: -25px 0 0 -25px;
@@ -102,11 +102,11 @@ class AutoresController {
             </head>
             <body class="fondo">
               <div class="nombre">
-                <h2>${nombre}</h2>
+                <h3>${nombre}</h3>
               
               </div>
               <div class="titulo">
-              <h2>${titulo}</h2>
+              <h3>${titulo}</h3>
             
             </div>
               <div class="canvas">

@@ -8,7 +8,7 @@ class ExpositorController {
   public async list(req: Request, res: Response): Promise<void> {
     try {
       const games = await pool.query(
-        `SELECT p.id,  CONCAT(a.Nombre1,' ',a.Apellido1) as nombre, p.titulo,p.certificado_E  FROM inscripcion as i, paper as p, autores as a where i.id=p.id_inscripcion AND p.id=a.id_paper_per AND a.expositor=true AND i.estado='V'`
+        `SELECT a.id,  CONCAT(a.Nombre1,' ',a.Apellido1) as nombre, p.titulo,a.certificado_A,p.id_paper  FROM inscripcion as i, paper as p, autores as a where i.id=p.id_inscripcion AND p.id=a.id_paper_per AND a.expositor=true AND i.estado='V'`
       );
       res.json(games);
     } catch (error) {}
@@ -18,21 +18,21 @@ class ExpositorController {
     console.log(id)
     try {
       const games = await pool.query(
-        `SELECT p.id,  CONCAT(a.Nombre1,' ',a.Apellido1) as nombre, p.titulo,p.certificado_E  FROM inscripcion as i, paper as p, autores as a where i.id=p.id_inscripcion AND p.id=a.id_paper_per AND a.expositor=true AND i.estado='V' AND p.id=${id};`
+        `SELECT a.id,  CONCAT(a.Nombre1,' ',a.Apellido1) as nombre, p.titulo,a.certificado_A,p.id_paper  FROM inscripcion as i, paper as p, autores as a where i.id=p.id_inscripcion AND p.id=a.id_paper_per AND a.expositor=true AND i.estado='V' AND a.id_paper_per=${id};`
       );
-      console.log(games[0])
-      res.json(games[0]);
+
+      res.json(games);
     } catch (error) {}
   }
   
 
   public async crearCertificado(req: Request, res: Response): Promise<void> {
     try {
-      const { id, nombre, titulo } = req.body;
+      const { id, nombre, titulo,id_paper } = req.body;
       const URlprincipal =keys.urlCertificados.url;
       const URLFondo = "http://localhost:3000"  + "/public/certificados/EXPOSITOR.PNG";
       const URLRuta =
-        URlprincipal + `/public/certificadosExpositores/${titulo}.pdf`;
+        URlprincipal + `/public/certificadosExpositores/${id_paper + nombre}.pdf`;
       QRCode.toDataURL(URLRuta, function (err, url) {
         const pdfv = `<!DOCTYPE html>
           <html>
@@ -57,7 +57,7 @@ class ExpositorController {
                   width: 100%;
                   height: 50px;
                   position: absolute;
-                  top: 47%;
+                  top: 50%;
                   left: 30%;
           
                   margin: -25px 0 0 -25px;
@@ -71,6 +71,7 @@ class ExpositorController {
             
                     margin: -25px 0 0 -25px;
                   }
+                
                 .canvas {
                   width: 110px;
                   height: 110px;
@@ -91,11 +92,11 @@ class ExpositorController {
             </head>
             <body class="fondo">
               <div class="nombre">
-                <h1>${nombre}</h1>
+                <h2>${nombre}</h2>
               
               </div>
               <div class="titulo">
-              <h2>${titulo}</h2>
+              <h3>${titulo}</h3>
             
             </div>
               <div class="canvas">
@@ -112,18 +113,18 @@ class ExpositorController {
         pdf
           .create(pdfv, options)
           .toFile(
-            `./public/certificadosExpositores/${titulo}.pdf`,
+            `./public/certificadosExpositores/${id_paper+nombre}.pdf`,
             function (err, res) {
               if (err) {
               } else {
               }
             }
           );
-        const ruta = `public/certificadosExpositores/${titulo}.pdf`;
+        const ruta = `public/certificadosExpositores/${id_paper+nombre}.pdf`;
         const certificado = {
-          certificado_E: ruta,
+          certificado_A: ruta,
         };
-        pool.query(`UPDATE paper set ? WHERE id = ?`, [certificado, id]);
+        pool.query(`UPDATE autores set ? WHERE id = ?`, [certificado, id]);
         res.json({ message: "El comite fue actualizado" });
       });
     } catch (error) {}
